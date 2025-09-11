@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/NGO_Minimal_Setup/NGO_Setup.unity
     guid: 921e89b5ba67d104ea390531de291206
   m_configObjects:
