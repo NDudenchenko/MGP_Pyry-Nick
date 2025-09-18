@@ -6,6 +6,9 @@ public class NetworkMovement : NetworkBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float mouseSens;
     [SerializeField] private Transform cam;
+
+    [SerializeField] private float jumpForce;
+    private float gravityForce = 9.1f;
     private CharacterController charCon;
 
     private float xRotation = 0f;
@@ -50,6 +53,11 @@ public class NetworkMovement : NetworkBehaviour
 
             // Horizontal rotation (player yaw)
             transform.Rotate(Vector3.up * mouseX);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                transform.Translate(Vector3.up * jumpForce);
+            }
         }
     }
 }
