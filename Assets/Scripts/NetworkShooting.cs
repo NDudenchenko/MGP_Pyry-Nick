@@ -30,8 +30,14 @@ public class NetworkShooting : NetworkBehaviour
             {
                 if (Physics.Raycast(fpsCam.position, fpsCam.forward, out RaycastHit hit, range, hitLayer))
                 {
+                    if (hit.collider.TryGetComponent<NetworkHealth>(out var health))
+                    {
+                        health.TakeDamageServerRpc(25);
+                    }
                     Debug.Log("Hit Player!");
                 }
+
+
                     //currentAmmo--;
             }
         }
