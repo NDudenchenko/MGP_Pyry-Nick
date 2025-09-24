@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: 2153301462612844178}
   - component: {fileID: 6491043306145893065}
   - component: {fileID: 3151150579083007167}
-  m_Layer: 0
+  - component: {fileID: 8216354019934562461}
+  - component: {fileID: 721165756743644156}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -189,6 +191,44 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   ServerSpawnPosition: []
   ClientSpawnPosition: []
+--- !u!114 &8216354019934562461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583870863566436283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c234b7e37aa764885dcae0545a1b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  range: 1000
+  rateOfFire: 1
+  magazineSize: 30
+  currentAmmo: 30
+  reserveAmmo: 300
+  maxAmmo: 300
+  fpsCam: {fileID: 2694725883645440593}
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &721165756743644156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583870863566436283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be85d20bd98e903408ef782c2d1ddf61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  currentHealth: 0
+  maxHealth: 100
 --- !u!1 &6772809644797828163
 GameObject:
   m_ObjectHideFlags: 0
