@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3151150579083007167}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,6 +187,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  ServerSpawnPosition: []
+  ClientSpawnPosition: []
 --- !u!1 &6772809644797828163
 GameObject:
   m_ObjectHideFlags: 0
