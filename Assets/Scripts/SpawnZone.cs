@@ -18,14 +18,12 @@ public class SpawnZone : NetworkBehaviour
         ClientSpawnPosition = GameObject.FindGameObjectsWithTag("ClientSpawnPoint");
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //playerPrefab = transform.parent.gameObject;
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -45,32 +43,6 @@ public class SpawnZone : NetworkBehaviour
         {
             return;
         }
-
-        // if (IsServer)
-        // {
-        //     if (NetworkObject.OwnerClientId == 0)
-        //     {
-        //         if (ServerSpawnPosition != null)
-        //             transform.position = ServerSpawnPosition[0].transform.position;
-        //     }
-        //     else if (NetworkObject.OwnerClientId != 0)
-        //     {
-        //         if (ClientSpawnPosition != null)
-        //         {
-        //             TeleportPlayer_ServerRpc();
-        //         }
-        //     }
-        //         
-        // }
-        // else if (IsClient)
-        // {
-        //     if (ClientSpawnPosition != null)
-        //     {
-        //         TeleportPlayer_ServerRpc();
-        //         
-        //     }
-        //
-        // }
     }
 
     //[ServerRpc]
