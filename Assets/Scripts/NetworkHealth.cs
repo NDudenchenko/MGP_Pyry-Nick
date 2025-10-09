@@ -5,10 +5,12 @@ public class NetworkHealth : NetworkBehaviour
 {
     [SerializeField]private int currentHealth;
     [SerializeField] private int maxHealth;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
         currentHealth = maxHealth;
+        
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -25,5 +27,13 @@ public class NetworkHealth : NetworkBehaviour
 
         
     }
-    
+
+    private void Update()
+    {
+        if(currentHealth <= 0)
+        {
+            this.NetworkObject.Despawn();
+        }
+    }
+
 }

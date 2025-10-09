@@ -6,10 +6,18 @@ public class NetworkMovement : NetworkBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float mouseSens;
     [SerializeField] private Transform cam;
+
+    [SerializeField] private float jumpForce;
+    private float gravityForce = 9.1f;
     private CharacterController charCon;
 
     private float xRotation = 0f;
     private Vector3 velocity;
+
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private bool isGrouneded;
+
+    [SerializeField] private LayerMask groundLayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -50,6 +58,18 @@ public class NetworkMovement : NetworkBehaviour
 
             // Horizontal rotation (player yaw)
             transform.Rotate(Vector3.up * mouseX);
+
+            if (Input.GetKeyDown(KeyCode.Space) && isGrouneded)
+            {
+                transform.Translate(Vector3.up * jumpForce);
+            }
+
+            isGrouneded = Physics.CheckSphere(groundCheck.position, 0.1f, groundLayer);
+
+            if (!isGrouneded)
+            {
+                
+            }
         }
     }
 }
