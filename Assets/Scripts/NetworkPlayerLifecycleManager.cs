@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -9,9 +10,11 @@ public class NetworkPlayerLifecycleManager : NetworkBehaviour
     private Transform serverSpawnTransform;
     [SerializeField]
     private Transform clientSpawnTransform;
+
+    [SerializeField]
+    private List<Transform> spawnPoints;
     
-    private NetworkObject playerNetworkObject;
-    private int playersCounter = 0;
+    private NetworkObject _playerNetworkObject;
     
     void Start()
     {
@@ -23,62 +26,41 @@ public class NetworkPlayerLifecycleManager : NetworkBehaviour
         
     }
     
-    
     public override void OnNetworkSpawn()
     {
-        NetworkManager.Singleton.OnClientConnectedCallback += OnPlayerConnected;
-        NetworkManager.Singleton.OnClientDisconnectCallback += OnPlayerDisconnected;
-        
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback += OnPlayerConnected;
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnPlayerDisconnected;
+        }
     }
     
     public override void OnNetworkDespawn()
     {
-        NetworkManager.Singleton.OnClientConnectedCallback -= OnPlayerConnected;
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnPlayerConnected;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnPlayerDisconnected;
+        }
     }
 
     private void OnPlayerConnected(ulong clientId)
     {
-        playersCounter++;
-
-        if (clientId == 0)
-        {
-            Debug.Log("Server connected");
-            GameObject player = Instantiate(playerPrefab);
-            playerNetworkObject = player.GetComponent<NetworkObject>();
-
-            if (serverSpawnTransform)
-            {
-                player.transform.position = serverSpawnTransform.position;
-                player.transform.rotation = serverSpawnTransform.rotation;
-            }
-
-            playerNetworkObject.SpawnWithOwnership(clientId);
-        }
-        else //Clients
-        {
-            Debug.Log("Client connected");
-            GameObject player = Instantiate(playerPrefab);
-            playerNetworkObject = player.GetComponent<NetworkObject>();
-            
-            if (clientSpawnTransform)
-            {
-                player.transform.position = clientSpawnTransform.position;
-                player.transform.rotation = clientSpawnTransform.rotation;
-            }
-            
-            playerNetworkObject.SpawnWithOwnership(clientId);
-        }
+        GameObject player = Instantiate(playerPrefab, spawnPoints[(int)clientId].position, spawnPoints[(int)clientId].rotation);
+        player.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
     }
-    
+
     private void OnPlayerDisconnected(ulong clientId)
     {
-        playersCounter--;
-        
-        if (HasAuthority && playerNetworkObject && playerNetworkObject.IsSpawned)
+        if (HasAuthority && _playerNetworkObject && _playerNetworkObject.IsSpawned)
         {
-            playerNetworkObject.Despawn();
+            _playerNetworkObject.Despawn();
         }
     }
 
-
+    private void SpawnPlayer(ulong clientId)
+    {
+        GameObject player = Instantiate(playerPrefab, spawnPoints[(int)clientId].position, spawnPoints[(int)clientId].rotation);
+        player.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
+    }
 }

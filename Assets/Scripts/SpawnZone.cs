@@ -45,11 +45,9 @@ public class SpawnZone : NetworkBehaviour
         }
     }
 
-    //[ServerRpc]
     [ServerRpc]
     public void TeleportPlayer_ServerRpc()
     {
-        //transform.position = ClientSpawnPosition[0].transform.position;
         TeleportPlayer_ClientRpc();
     }
     

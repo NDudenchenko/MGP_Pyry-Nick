@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2920599605
+  GlobalObjectIdHash: 2008915034
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -176,8 +176,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   playerPrefab: {fileID: 1583870863566436283, guid: 5d4b1da88827dcd47a0478cb1ec8370e, type: 3}
-  serverSpawnTransform: {fileID: 1103905908}
-  clientSpawnTransform: {fileID: 670907792}
+  serverSpawnTransform: {fileID: 0}
+  clientSpawnTransform: {fileID: 0}
+  spawnPoints:
+  - {fileID: 1103905908}
+  - {fileID: 670907792}
+  - {fileID: 670907792}
 --- !u!4 &4239299
 Transform:
   m_ObjectHideFlags: 0
@@ -598,14 +602,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670907791}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0.91709214, z: -0, w: 0.3986754}
   m_LocalPosition: {x: 4.29, y: 0.1, z: -4.072}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 698282883}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -133.009, z: 0}
 --- !u!1 &690024866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,14 +1212,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103905907}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.38749933, z: -0, w: 0.92187}
   m_LocalPosition: {x: -4.133, y: 0.1, z: 4.313}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2014793868}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45.598, z: 0}
 --- !u!1 &1482360240
 GameObject:
   m_ObjectHideFlags: 0

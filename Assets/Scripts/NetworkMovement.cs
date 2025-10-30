@@ -32,8 +32,6 @@ public class NetworkMovement : NetworkBehaviour
         cam.gameObject.SetActive(IsOwner);
     }
 
-
-
     // Update is called once per frame
     void Update()
     {
@@ -71,5 +69,25 @@ public class NetworkMovement : NetworkBehaviour
                 
             }
         }
+    }
+    
+    public override void OnNetworkSpawn()
+    {
+        SyncTransform_ServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SyncTransform_ServerRpc()
+    {
+        UpdateTransform_ClientRpc(transform.position, transform.rotation);
+    }
+
+    [ClientRpc]
+    public void UpdateTransform_ClientRpc(Vector3 position, Quaternion rotation)
+    {
+        if (!IsOwner) return;
+            
+        transform.position = position;
+        transform.rotation = rotation;
     }
 }
