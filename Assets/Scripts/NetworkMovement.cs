@@ -11,6 +11,8 @@ public class NetworkMovement : NetworkBehaviour
     private float gravityForce = 9.1f;
     private CharacterController charCon;
 
+    private bool playerFrozen;
+
     private float xRotation = 0f;
     private float verticalVelocity;
 
@@ -25,10 +27,12 @@ public class NetworkMovement : NetworkBehaviour
         charCon = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        gravityForce = 0;
     }
 
     private void Start()
     {
+        playerFrozen = true;
         cam.gameObject.SetActive(IsOwner);
     }
 
@@ -62,15 +66,21 @@ public class NetworkMovement : NetworkBehaviour
                 verticalVelocity = Mathf.Sqrt(jumpForce * -2.0f * gravityForce);
             }
 
+            if (Input.GetKeyDown(KeyCode.W) && playerFrozen)
+            {
+                gravityForce = 9.1f;
+                playerFrozen = false;
+            }
+
             isGrouneded = Physics.CheckSphere(groundCheck.position, 0.1f, groundLayer);
 
-            if (!isGrouneded)
+            if (isGrouneded)
             {
-                verticalVelocity += gravityForce;
+                verticalVelocity = 0;
             }
             else
             {
-                verticalVelocity = 0;
+                verticalVelocity += gravityForce;
             }
 
             transform.Translate(Vector3.down * verticalVelocity * Time.deltaTime);

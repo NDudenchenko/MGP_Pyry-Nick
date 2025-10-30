@@ -6,20 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/PyryScne.unity
+    guid: c4bd4b2d7d5dc4e44a49ad44aed0f958
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 05ad62a1fda6b1144933ebfabe12e256
+  - enabled: 1
+    path: Assets/Scenes/NickScene.unity
+    guid: 4d12cb88bacfbe044bd2f12a7499aae0
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
     path: Assets/NGO_Minimal_Setup/NGO_Setup.unity
     guid: 921e89b5ba67d104ea390531de291206
-  - enabled: 1
-    path: Assets/Scenes/PyryScne.unity
-    guid: c4bd4b2d7d5dc4e44a49ad44aed0f958
-  - enabled: 1
-    path: Assets/Scenes/NickScene.unity
-    guid: 4d12cb88bacfbe044bd2f12a7499aae0
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
