@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class NetworkShooting : NetworkBehaviour
 {
-
     [SerializeField] private float range;
     [SerializeField] private float rateOfFire;
 
@@ -15,11 +14,6 @@ public class NetworkShooting : NetworkBehaviour
     [SerializeField] private Transform fpsCam;
 
     [SerializeField] private LayerMask hitLayer;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -36,8 +30,6 @@ public class NetworkShooting : NetworkBehaviour
                     }
                     Debug.Log("Hit Player!");
                 }
-
-
                     //currentAmmo--;
             }
         }

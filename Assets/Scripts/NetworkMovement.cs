@@ -12,7 +12,7 @@ public class NetworkMovement : NetworkBehaviour
     private CharacterController charCon;
 
     private float xRotation = 0f;
-    private Vector3 velocity;
+    private float verticalVelocity;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private bool isGrouneded;
@@ -61,15 +61,22 @@ public class NetworkMovement : NetworkBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space) && isGrouneded)
             {
-                transform.Translate(Vector3.up * jumpForce);
+                verticalVelocity = Mathf.Sqrt(jumpForce * -2.0f * gravityForce);
             }
 
             isGrouneded = Physics.CheckSphere(groundCheck.position, 0.1f, groundLayer);
 
             if (!isGrouneded)
             {
-                
+                verticalVelocity += gravityForce;
             }
+            else
+            {
+                verticalVelocity = 0;
+            }
+
+            transform.Translate(Vector3.down * verticalVelocity * Time.deltaTime);
+
         }
     }
 }

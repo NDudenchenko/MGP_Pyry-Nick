@@ -10,22 +10,15 @@ public class NetworkHealth : NetworkBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
-        
     }
 
     [ServerRpc(RequireOwnership = false)]
 
     public void TakeDamageServerRpc(int damage)
     {
-        
-
-        
             currentHealth -= damage;
 
             Debug.Log("Took Damage" + damage + "currentHealth is " + currentHealth);
-        
-
-        
     }
 
     private void Update()
@@ -35,5 +28,4 @@ public class NetworkHealth : NetworkBehaviour
             this.NetworkObject.Despawn();
         }
     }
-
 }

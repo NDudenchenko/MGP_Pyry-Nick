@@ -156,7 +156,7 @@ MonoBehaviour:
   cam: {fileID: 2694725883645440593}
   jumpForce: 10
   groundCheck: {fileID: 7736216909585662164}
-  isGrouneded: 0
+  isGrouneded: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
