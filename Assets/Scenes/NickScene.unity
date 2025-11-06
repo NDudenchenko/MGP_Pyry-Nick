@@ -181,7 +181,6 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1103905908}
   - {fileID: 670907792}
-  - {fileID: 670907792}
 --- !u!4 &4239299
 Transform:
   m_ObjectHideFlags: 0
@@ -442,6 +441,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &520182245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 520182247}
+  - component: {fileID: 520182246}
+  m_Layer: 0
+  m_Name: SessionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &520182246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520182245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be75b491f8c24e347aef8c8fad630102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &520182247
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520182245}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &612086748
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +646,7 @@ Transform:
   m_GameObject: {fileID: 670907791}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.91709214, z: -0, w: 0.3986754}
-  m_LocalPosition: {x: 4.29, y: 3, z: -4.072}
+  m_LocalPosition: {x: 4.29, y: 2.5, z: -4.072}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1213,7 +1256,7 @@ Transform:
   m_GameObject: {fileID: 1103905907}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38749933, z: -0, w: 0.92187}
-  m_LocalPosition: {x: -4.133, y: 3, z: 4.313}
+  m_LocalPosition: {x: -4.133, y: 2.5, z: 4.313}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1668,3 +1711,4 @@ SceneRoots:
   - {fileID: 1103905908}
   - {fileID: 670907792}
   - {fileID: 4239299}
+  - {fileID: 520182247}
