@@ -6,9 +6,9 @@ public class NetworkHealth : NetworkBehaviour
     [SerializeField]private int currentHealth;
     [SerializeField] private int maxHealth;
 
-
+    [SerializeField] private GameObject specMode;
     public NetworkVariable<int> _health = new NetworkVariable<int>
-        (100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        (100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,6 +30,7 @@ public class NetworkHealth : NetworkBehaviour
     {
         if(_health.Value <= 0)
         {
+            Instantiate(specMode, transform.position, Quaternion.identity);
             this.NetworkObject.Despawn();
         }
     }

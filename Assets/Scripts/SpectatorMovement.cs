@@ -1,6 +1,8 @@
+using Unity.Netcode;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
-public class SpectatorMovement : MonoBehaviour
+public class SpectatorMovement : NetworkBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float mouseSens;
@@ -19,9 +21,16 @@ public class SpectatorMovement : MonoBehaviour
         Cursor.visible = false;
     }
 
+    private void Awake()
+    {
+        SpawnSpectator();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
@@ -50,5 +59,9 @@ public class SpectatorMovement : MonoBehaviour
         {
             transform.Translate(Vector3.down * flyForce * Time.deltaTime);
         }
+    }
+
+    private void SpawnSpectator()
+    {
     }
 }
