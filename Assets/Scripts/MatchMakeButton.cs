@@ -23,13 +23,14 @@ public class MatchMakeButton : NetworkBehaviour
         startButton.onClick.AddListener(() =>
         {
             ToggleButtons();
-            matchmakerCancellationSource.Cancel();
+            StartMatchMake();
+            
         });
 
         cancelButton.onClick.AddListener(() =>
         {
             ToggleButtons();
-            StartMatchMake();
+            matchmakerCancellationSource?.Cancel();
         });
     }
 

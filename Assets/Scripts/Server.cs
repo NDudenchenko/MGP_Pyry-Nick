@@ -4,13 +4,13 @@ using Unity.Services.Authentication.Server;
 using Unity.Services.Core;
 using Unity.Services.Multiplayer;
 using System;
-using UnityEngine;
-#endif
 using Unity.Netcode;
+#endif
+using UnityEngine;
 
 namespace Services
 {
-    public class Server : NetworkBehaviour
+    public class Server : MonoBehaviour
     {
 #if UNITY_SERVER || ENABLE_UCS_SERVER
 
@@ -87,9 +87,9 @@ namespace Services
             }
         }
 
-        public override void OnDestroy()
+        public void OnDestroy()
         {
-            if (NetworkManager.Singleton == null || !IsServer) return;
+            if (NetworkManager.Singleton == null) return;
             
             NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;

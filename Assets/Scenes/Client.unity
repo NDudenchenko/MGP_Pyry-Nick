@@ -1689,6 +1689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  startButton: {fileID: 1532044946}
+  cancelButton: {fileID: 593454982}
 --- !u!114 &1783821405
 MonoBehaviour:
   m_ObjectHideFlags: 0
