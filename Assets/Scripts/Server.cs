@@ -72,6 +72,7 @@ namespace Services
                // Otherwise you risk the Session being in an uninitialized state.
                 async void OnServerAllocatedCallback(IMultiplayAllocation obj)
                 {
+                    Debug.Log("[Multiplay] Server is allocated");
                     var session = m_SessionManager.Session;
                     
                     NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
@@ -81,6 +82,7 @@ namespace Services
                     NetworkManager.Singleton.StartServer();
                     NetworkManager.Singleton.SceneManager.LoadScene("PyryScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);
                     
+
                     await m_SessionManager.SetPlayerReadinessAsync(true);
                     Debug.Log("[Multiplay] Server is ready to accept players");
                 }
