@@ -54,15 +54,17 @@ public class NetworkPlayerLifecycleManager : NetworkBehaviour
     {
         GameObject player = Instantiate(playerPrefab, spawnPoints[(int)clientId].position, spawnPoints[(int)clientId].rotation);
         player.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
+        
+        JoinSessionAsClient();
 
-        if (clientId == 0)
-        {
-            StartSessionAsHost();
-        }
-        else
-        {
-            JoinSessionAsClient();
-        }
+         if (clientId == 0 || clientId == 1)
+         {
+             StartSessionAsHost();
+         }
+         else
+         {
+             JoinSessionAsClient();
+         }
     }
 
     private void OnPlayerDisconnected(ulong clientId)
