@@ -55,16 +55,19 @@ public class NetworkPlayerLifecycleManager : NetworkBehaviour
         GameObject player = Instantiate(playerPrefab, spawnPoints[(int)clientId].position, spawnPoints[(int)clientId].rotation);
         player.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
         
-        JoinSessionAsClient();
+        GameObject player2 = Instantiate(playerPrefab, spawnPoints[(int)clientId].position, spawnPoints[(int)clientId].rotation);
+        player.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
+        
+        //JoinSessionAsClient();
 
-         if (clientId == 0 || clientId == 1)
-         {
-             StartSessionAsHost();
-         }
-         else
-         {
-             JoinSessionAsClient();
-         }
+         // if (clientId == 0 || clientId == 1)
+         // {
+         //     StartSessionAsHost();
+         // }
+         // else
+         // {
+         //     JoinSessionAsClient();
+         // }
     }
 
     private void OnPlayerDisconnected(ulong clientId)
@@ -96,6 +99,8 @@ public class NetworkPlayerLifecycleManager : NetworkBehaviour
 
     async Task JoinSessionAsClient()
     {
+        Debug.Log($"Joining session {_sessionId}");
+        
         if (_sessionId.Length != 0)
         {
             var session = await MultiplayerService.Instance.JoinSessionByIdAsync(_sessionId);
