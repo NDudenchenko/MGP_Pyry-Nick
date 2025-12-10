@@ -54,7 +54,7 @@ public class MatchMakeButton : NetworkBehaviour
             Debug.Log("Joingin Session..");
             
             //await MultiplayerService.Instance.JoinSessionByCodeAsync(session.Code);
-            NetworkManager.Singleton.StartClient();
+            //NetworkManager.Singleton.StartClient();
         }
         catch (Exception e)
         {
