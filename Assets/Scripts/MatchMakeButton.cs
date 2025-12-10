@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class MatchMakeButton : NetworkBehaviour
 
 {
-#if !UNITY_SERVER
+#if UNITY_SERVER
 
     [SerializeField]
     private Button startButton;
@@ -54,7 +54,7 @@ public class MatchMakeButton : NetworkBehaviour
             Debug.Log("Joingin Session..");
             
             //await MultiplayerService.Instance.JoinSessionByCodeAsync(session.Code);
-            //NetworkManager.Singleton.StartClient();
+            NetworkManager.Singleton.StartClient();
         }
         catch (Exception e)
         {

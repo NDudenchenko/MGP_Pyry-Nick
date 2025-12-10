@@ -52,11 +52,9 @@ public class NetworkPlayerLifecycleManager : NetworkBehaviour
 
     private void OnPlayerConnected(ulong clientId)
     {
-        GameObject player = Instantiate(playerPrefab, spawnPoints[(int)clientId].position, spawnPoints[(int)clientId].rotation);
-        player.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
-        
-        GameObject player2 = Instantiate(playerPrefab, spawnPoints[(int)clientId].position, spawnPoints[(int)clientId].rotation);
-        player.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
+        //GameObject player = Instantiate(playerPrefab, spawnPoints[(int)clientId].position, spawnPoints[(int)clientId].rotation);
+        //player.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
+       
         
         //JoinSessionAsClient();
 

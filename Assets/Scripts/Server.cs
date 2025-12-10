@@ -7,6 +7,8 @@ using System;
 using Unity.Netcode;
 #endif
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 namespace Services
 {
@@ -20,6 +22,9 @@ namespace Services
         private const string k_DefaultGameType = "DefaultGameType";
         private const string k_DefaultBuildId = "1310656";
         private const string k_DefaultMap = "DefaultMap";
+
+        [SerializeField] private NetworkObject _playerNetworkObject;
+        private Transform[] _spawnLocations;
 
         IMultiplaySessionManager m_SessionManager;
 
@@ -80,12 +85,67 @@ namespace Services
                     NetworkManager.Singleton.ConnectionApprovalCallback += ConnectionApproval;
                     
                     NetworkManager.Singleton.StartServer();
+                    NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnLoadEventCompleted;
+
                     NetworkManager.Singleton.SceneManager.LoadScene("PyryScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);
                     
+
 
                     await m_SessionManager.SetPlayerReadinessAsync(true);
                     Debug.Log("[Multiplay] Server is ready to accept players");
                 }
+            }
+        }
+
+        private void OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
+        {
+            if(sceneName == "PyryScene")
+            {
+                InitSpawnLocations();
+                SpawnPlayerObjects();
+            }
+
+        }
+
+        private void InitSpawnLocations()
+        {
+            // Gather all Spawn Location objects
+            var spawnLocationObjects = GameObject.FindGameObjectsWithTag("SpawnLocation");
+
+            // If none are present, add the World Origin as the only spawn location
+            if (spawnLocationObjects.Length == 0)
+            {
+                var go = Instantiate(new GameObject("SpawnLocation"), Vector3.zero, Quaternion.identity);
+                _spawnLocations = new[] { go.transform };
+                return;
+            }
+
+            // Convert existing Spawn Location objects into an array of Transforms
+            _spawnLocations = new Transform[spawnLocationObjects.Length];
+            for (int i = 0; i < spawnLocationObjects.Length; i++)
+                _spawnLocations[i] = spawnLocationObjects[i].transform;
+        }
+
+        private void SpawnPlayerObjects()
+        {
+            // Check Player Prefab
+            if (_playerNetworkObject == null)
+            {
+                Debug.LogError("Player Prefab is not assigned!");
+                return;
+            }
+
+            var playerObjectIndex = 0;
+            foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+            {
+                // Cycle through spawn locations
+                var spawnLocationIndex = playerObjectIndex % _spawnLocations.Length;
+                var spawnPos = _spawnLocations[spawnLocationIndex].position;
+
+                var playerObj = Instantiate(_playerNetworkObject, spawnPos, Quaternion.identity);
+                playerObj.SpawnAsPlayerObject(client.ClientId, true);
+
+                playerObjectIndex++;
             }
         }
 
