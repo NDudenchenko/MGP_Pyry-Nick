@@ -221,6 +221,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   currentHealth: 0
   maxHealth: 100
+  respawnPoints: []
   specMode: {fileID: 9110924729692672919, guid: 3895246ec27b0f94c9bcc354a5501d0b, type: 3}
   _health:
     m_InternalValue: 100

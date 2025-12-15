@@ -3,18 +3,18 @@ using UnityEngine.UI;
 
 public class NetworkButtonsDeactivator : MonoBehaviour
 {
-    [SerializeField]
-    Button StartHostButton;
-    [SerializeField]
-    Button StartClientButton;
+    // [SerializeField]
+    // Button StartHostButton;
+    // [SerializeField]
+    // Button StartClientButton;
     [SerializeField]
     GameObject NetworkWidget;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartHostButton.onClick.AddListener(DeactivateButton);
-        StartClientButton.onClick.AddListener(DeactivateButton);
+        // StartHostButton.onClick.AddListener(DeactivateButton);
+        // StartClientButton.onClick.AddListener(DeactivateButton);
     }
 
     // Update is called once per frame
@@ -24,8 +24,8 @@ public class NetworkButtonsDeactivator : MonoBehaviour
     }
     private void DeactivateButton()
     {
-        StartHostButton.gameObject.SetActive(false);
-        StartClientButton.gameObject.SetActive(false);
+        // StartHostButton.gameObject.SetActive(false);
+        // StartClientButton.gameObject.SetActive(false);
     }
 
     public void DeactivateNetworkWidget()

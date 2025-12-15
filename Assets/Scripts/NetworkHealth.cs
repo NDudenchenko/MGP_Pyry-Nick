@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class NetworkHealth : NetworkBehaviour
 {
-    [SerializeField]private int currentHealth;
+    [SerializeField] private int currentHealth;
     [SerializeField] private int maxHealth;
+    [SerializeField] private GameObject[] respawnPoints;
 
     [SerializeField] private GameObject specMode;
     public NetworkVariable<int> _health = new NetworkVariable<int>
@@ -15,25 +16,37 @@ public class NetworkHealth : NetworkBehaviour
     private void Awake()
     {
         _health.Value = maxHealth;
+        
+        respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
     }
 
     [ServerRpc(RequireOwnership = false)]
-
     public void TakeDamageServerRpc(int damage)
     {
             _health.Value -= damage;
 
             Debug.Log("Took Damage" + damage + "currentHealth is " + _health.Value);
     }
-
-    private void Update()
+    
+    [ServerRpc(RequireOwnership = false)]
+    public void ReSpawnServerRpc()
     {
-        if(_health.Value <= 0)
+        if (respawnPoints.Length > 0)
         {
-            Instantiate(specMode, transform.position, Quaternion.identity);
-            this.NetworkObject.Despawn();
+            int randSpawnIndex = Random.Range(0, respawnPoints.Length);
+            this.transform.position = respawnPoints[randSpawnIndex].transform.position;
+            _health.Value = maxHealth;
         }
     }
 
-    
+    private void Update()
+    {
+        if (_health.Value <= 0)
+        {
+            // Instantiate(specMode, transform.position, Quaternion.identity);
+            // this.NetworkObject.Despawn();
+
+            //ReSpawnServerRpc();
+        }
+    }
 }
