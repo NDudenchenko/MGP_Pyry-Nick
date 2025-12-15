@@ -54,11 +54,17 @@ public class NetworkHealth : NetworkBehaviour
 
     private void OnClientRespawn()
     {
-        if (respawnPoints.Length > 0)
+        if (IsOwner)
         {
-            int randSpawnIndex = Random.Range(0, respawnPoints.Length);
-            this.transform.position = respawnPoints[randSpawnIndex].transform.position;
-            ReSpawnServerRpc();
+            Debug.Log("Respawned");
+            if (respawnPoints.Length > 0)
+            {
+                ReSpawnServerRpc();
+                int randSpawnIndex = Random.Range(0, respawnPoints.Length);
+                NetworkObject.transform.position = respawnPoints[randSpawnIndex].transform.position;
+            }
         }
+            
+        
     }
 }
