@@ -7,6 +7,8 @@ public class NetworkButtonsDeactivator : MonoBehaviour
     Button StartHostButton;
     [SerializeField]
     Button StartClientButton;
+    [SerializeField]
+    GameObject NetworkWidget;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,4 +28,8 @@ public class NetworkButtonsDeactivator : MonoBehaviour
         StartClientButton.gameObject.SetActive(false);
     }
 
+    public void DeactivateNetworkWidget()
+    {
+        NetworkWidget.SetActive(false);
+    }
 }

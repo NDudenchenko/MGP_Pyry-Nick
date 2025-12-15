@@ -4,9 +4,12 @@ using System.Threading.Tasks;
 using Unity.Services.Multiplayer;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class NetworkPlayerLifecycleManager : NetworkBehaviour
 {
+    public UnityEvent OnTwoPlayerConnected;
+    
     [SerializeField]
     private GameObject playerPrefab;
     [SerializeField]
@@ -29,7 +32,10 @@ public class NetworkPlayerLifecycleManager : NetworkBehaviour
 
     void Update()
     {
-        
+        if (NetworkManager.Singleton.ConnectedClientsList.Count > 1)
+        {
+            OnTwoPlayerConnected.Invoke();
+        }
     }
     
     public override void OnNetworkSpawn()
@@ -54,20 +60,17 @@ public class NetworkPlayerLifecycleManager : NetworkBehaviour
     {
         GameObject player = Instantiate(playerPrefab, spawnPoints[(int)clientId].position, spawnPoints[(int)clientId].rotation);
         player.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
-        
-        GameObject player2 = Instantiate(playerPrefab, spawnPoints[(int)clientId].position, spawnPoints[(int)clientId].rotation);
-        player.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
-        
-        //JoinSessionAsClient();
 
-         // if (clientId == 0 || clientId == 1)
-         // {
-         //     StartSessionAsHost();
-         // }
-         // else
-         // {
-         //     JoinSessionAsClient();
-         // }
+         if (clientId == 0)
+         {
+             StartSessionAsHost();
+         }
+         else
+         {
+             JoinSessionAsClient();
+         }
+         
+         
     }
 
     private void OnPlayerDisconnected(ulong clientId)
