@@ -16,6 +16,7 @@ public class NetworkHealth : NetworkBehaviour
     private void Awake()
     {
         _health.Value = maxHealth;
+        _health.OnValueChanged += OnHealthValueChanged;
         
         respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
     }
@@ -23,9 +24,12 @@ public class NetworkHealth : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void TakeDamageServerRpc(int damage)
     {
+        if (_health.Value > 0)
+        {
             _health.Value -= damage;
 
             Debug.Log("Took Damage" + damage + "currentHealth is " + _health.Value);
+        }
     }
     
     [ServerRpc(RequireOwnership = false)]
@@ -43,10 +47,20 @@ public class NetworkHealth : NetworkBehaviour
 
     private void Update()
     {
-        if (_health.Value <= 0)
+        // if (_health.Value <= 0)
+        // {
+        //     // Instantiate(specMode, transform.position, Quaternion.identity);
+        //     // this.NetworkObject.Despawn();
+        //
+        //     //OnClientRespawn();
+        // }
+    }
+    
+    private void OnHealthValueChanged(int previousValue, int newValue)
+    {
+        if (IsOwner && newValue <= 0 && previousValue > 0)
         {
-            // Instantiate(specMode, transform.position, Quaternion.identity);
-            // this.NetworkObject.Despawn();
+            Debug.Log($"Death");
 
             OnClientRespawn();
         }
